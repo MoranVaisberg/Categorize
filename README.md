@@ -9,12 +9,12 @@ Solution Overview	5
 Test Cases	6
 
  
-#PREREQUISITES
+# PREREQUISITES
 
 property.json is a system property file and should present in the installation folder (“C:\leadspace”).
 property.json file contains the path to dictionary.json and categorisation.log files.
 dictionary.json file contains the predefined dictionary  
-TECHNICAL DESIGN
+# TECHNICAL DESIGN
 KEYWORD CATEGORIZATION	FEATURE ID: 1
 DESCRIPTION
 •	Implementation of java service using REST protocol. The service provides a keyword categorization functionality: 
@@ -40,7 +40,7 @@ eComerce
 •	Example of url: http://localhost:8080/categorize?phrase=Vice+President+of+Sales+and+Marketing
 
  
-#SOLUTION OVERVIEW
+# SOLUTION OVERVIEW
 
 A phrase, provided as a query parameter in GET method of REST protocol, represents a collection of Strings. The requirement is to find the strings, which are in the dictionary and their position in the phrase. The response will be in JSON format.
 
@@ -69,7 +69,7 @@ Step5: No Match - proceed to Step1 to pick next String
 
 
 
-#TEST CASES
+# TEST CASES
 
 1.	Find a matches between phase sub strings and the dictionary
 Dictionary: ["President","Vice President","Sales","Marketing", "IT", "CFO", "CTO",“Banking","eComerce"]
