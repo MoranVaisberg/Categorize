@@ -1,0 +1,11 @@
+{
+  "comment":"Case when Vice matches only a prefix, but a match on Manager Department",
+  "input":{
+    "categories": ["Vice President","Manager Department","company"],
+    "phrase": "Vice Manager Department of company"
+  },
+  "expected":{
+    "Manager Department": 5,
+    "company": 27
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "comment":"Test a phrase with no matching in the dictionary",
+  "input":{
+    "categories": ["President","Vice President","Sales","Marketing","IT","CFO","CTO","Banking","eComerce"],
+    "phrase": "This is just not matching phrase"
+  },
+  "expected":{
+  }
+}

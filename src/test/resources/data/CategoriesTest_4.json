@@ -1,0 +1,13 @@
+{
+  "comment":"Find a matches between phase sub strings and the dictionary",
+  "input":{
+    "categories": ["President","Vice President","Sales","Marketing","IT","CFO","CTO","Banking","eComerce"],
+    "phrase": "President CTO IT and Banking"
+  },
+  "expected":{
+    "President": 0,
+    "CTO": 10,
+    "IT": 14,
+    "Banking": 21
+  }
+}
