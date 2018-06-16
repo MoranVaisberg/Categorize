@@ -12,7 +12,7 @@ import java.util.TreeMap;
 /**
  * This class responsible to load test cases
  */
-public class AbstractTestCase {
+public abstract class AbstractTestCase {
 
     private static final String PHRASE_KEY = "phrase";
     private static final String EXPECTED_KEY = "expected";

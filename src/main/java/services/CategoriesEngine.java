@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 /**
  * This class implements an algorithm to find categories and the positions in the phrase
- * Step1: Pick a String from an input categories (a primary expression) and find a match or prefix in the dictionary categories
+ * Step1: Pick a String from an input categories (a primary Keyword) and find a match or prefix in the dictionary categories
  *   Match: e.g. category = 'Sales', dictionary = 'Sales'
  *   Prefix: e.g. category = 'Vice', dictionary = 'Vice President'
  *
@@ -16,9 +16,9 @@ import java.util.TreeMap;
  *                concatenated String = 'Vice President'
  *                Proceed to Step2
  *
- * Step4: During Step2 and Step3, perform the same action for secondary expression.
- *   Primary Expression can be a concatenation of several input categories, while Secondary Expression is always single category
- *   e.g. Primary Expression = 'Vice Manager', Secondary Expression = "Manager"
+ * Step4: During Step2 and Step3, perform the same action for Secondary Keyword.
+ *   Primary Keyword can be a concatenation of several input categories, while Secondary Keyword is always single category
+ *   e.g. Primary Keyword = 'Vice Manager', Secondary Keyword = "Manager"
  *   dictionary = {'Vice President', 'Manager Department'}
  *
  *   In case Primary returns false, proceed with Secondary on the same loop iteration.
@@ -46,13 +46,13 @@ public class CategoriesEngine {
      */
     public Map<String, Integer> getCategoriesAndPositions(Set<String> dictionary, String phrase) {
         Map<String, Integer> categoriesPosition = new TreeMap<String, Integer>();
-        String[] categories =  getCategories(phrase);
-        StringBuilder primaryExpression = new StringBuilder();
+        String[] keywords =  getKeywords(phrase);
+        StringBuilder primaryKeyword = new StringBuilder();
 
-        for ( int i=0; i< categories.length; i++ ){
-            String secondaryExpression = categories[i];
-            primaryExpression.append(secondaryExpression);
-            findCategoryInDictionary(dictionary, primaryExpression, secondaryExpression, categoriesPosition, phrase);
+        for ( int i=0; i< keywords.length; i++ ){
+            String secondaryKeyword = keywords[i];
+            primaryKeyword.append(secondaryKeyword);
+            findCategoryInDictionary(dictionary, primaryKeyword, secondaryKeyword, categoriesPosition, phrase);
         }
 
         return categoriesPosition;
@@ -62,70 +62,70 @@ public class CategoriesEngine {
      * Look for a exact match or prefix match in the dictionary categories
      */
     private void findCategoryInDictionary(Set<String> dictionary,
-                                          StringBuilder primaryExpression,
-                                          String secondaryExpression,
+                                          StringBuilder primaryKeyword,
+                                          String secondaryKeyword,
                                           Map<String, Integer> categoriesPosition,
                                           String phrase) {
 
-        State state = getState(dictionary, primaryExpression.toString(), secondaryExpression);
+        State state = getState(dictionary, primaryKeyword.toString(), secondaryKeyword);
 
         switch (state) {
             case PRIMARY_FOUND:
-                    categoriesPosition.put(primaryExpression.toString(), phrase.indexOf(primaryExpression.toString()));
-                    primaryExpression.setLength(0);
+                    categoriesPosition.put(primaryKeyword.toString(), phrase.indexOf(primaryKeyword.toString()));
+                    primaryKeyword.setLength(0);
                     break;
             case PRIMARY_PREFIX_FOUND:
-                    primaryExpression.append(SPACE_DELIMETER);
+                    primaryKeyword.append(SPACE_DELIMETER);
                     break;
             case SECONDARY_FOUND:
-                    categoriesPosition.put(secondaryExpression, phrase.indexOf(secondaryExpression));
-                    primaryExpression.setLength(0);
+                    categoriesPosition.put(secondaryKeyword, phrase.indexOf(secondaryKeyword));
+                    primaryKeyword.setLength(0);
                     break;
             case SECONDARY_PREFIX_FOUND:
-                    primaryExpression.setLength(0);
-                    primaryExpression.append(secondaryExpression);
-                    primaryExpression.append(SPACE_DELIMETER);
+                    primaryKeyword.setLength(0);
+                    primaryKeyword.append(secondaryKeyword);
+                    primaryKeyword.append(SPACE_DELIMETER);
                     break;
             default:
                 // String is not in dictionary
-                // clean the primaryExpression only if no match, otherwise preserve it to next iteration
-                    primaryExpression.setLength(0);
+                // clean the primaryKeyword only if no match, otherwise preserve it to next iteration
+                    primaryKeyword.setLength(0);
                     break;
             }
     }
 
     /**
-     *  Find a match or prefix in the dictionary categories for primaryExpression and secondaryExpression
+     *  Find a match or prefix in the dictionary categories for primaryKeyword and secondaryKeyword
      *  If primary found (prefix or exact category), stop searching in the dictionary
      *  If secondary found (prefix or exact category), proceed till end of dictionary or primary found
      */
-    private State getState(Set<String> dictionary, String primaryExpression, String secondaryExpression) {
+    private State getState(Set<String> dictionary, String primaryKeyword, String secondaryKeyword) {
         State state = State.NOT_FOUND;
 
         for (String category : dictionary){
             // match found
-            if(category.equals(primaryExpression)){
+            if(category.equals(primaryKeyword)){
                 state = State.PRIMARY_FOUND;
                 break;
             }
             // prefix match found
-            if(category.startsWith(primaryExpression)) {
+            if(category.startsWith(primaryKeyword)) {
                 state = State.PRIMARY_PREFIX_FOUND;
                 break;
             }
             //match found
-            if(category.equals(secondaryExpression)){
+            if(category.equals(secondaryKeyword)){
                 state = State.SECONDARY_FOUND;
             }
             // prefix match found
-            if(category.startsWith(secondaryExpression)) {
+            if(category.startsWith(secondaryKeyword)) {
                 state = (state.equals(State.NOT_FOUND)) ? State.SECONDARY_PREFIX_FOUND : state;
             }
         }
         return state;
     }
 
-    private String[] getCategories(String phrase) {
+    private String[] getKeywords(String phrase) {
         return phrase.split(SPACE_DELIMETER);
     }
 

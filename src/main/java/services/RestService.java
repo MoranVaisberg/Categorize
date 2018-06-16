@@ -15,7 +15,7 @@ public class RestService {
 
     /**
      * GET method for Categorization
-     * url example: http://localhost:8080/categorize?phrase=Vice+President+of+Sales+and+Marketing
+     * URI example: http://localhost:8080/categorize?phrase=Vice+President+of+Sales+and+Marketing
      * @param phrase is a list of categories, which should be found in the dictionary
      */
     @GET

@@ -11,7 +11,7 @@ import javax.ws.rs.core.UriBuilder;
 
 public class RestServiceTest {
 
-    private static final String URL = "http://localhost:8080/categorize?phrase=Vice+President+of+Sales+and+Marketing";
+    private static final String URI = "http://localhost:8080/categorize?phrase=Vice+President+of+Sales+and+Marketing";
     private static final int SUCCESS = 200;
     private static final String MEDIA_TYPE = "application/json";
 
@@ -39,6 +39,6 @@ public class RestServiceTest {
     }
 
     private static URI getBaseURI() {
-        return UriBuilder.fromUri(URL).build();
+        return UriBuilder.fromUri(URI).build();
     }
 }

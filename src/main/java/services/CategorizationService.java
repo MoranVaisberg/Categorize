@@ -37,7 +37,7 @@ public class CategorizationService {
      *    "Marketing" : 28
      *  }
      *  phrase = "Vice President of Sales and Marketing"
-     * @param phrase - QueryParam from GET method url
+     * @param phrase - QueryParam from URI in GET method
      * @return Response
      */
     public Response getResponse(String phrase) throws CategorizationException {
@@ -60,7 +60,7 @@ public class CategorizationService {
             response = e.getShortMessage();
             try {
                 writeLogMessage(LOG_FILE, e.getMessage());
-            } catch (CategorizationException e1) {
+            } catch (CategorizationException c) {
             }
             throw e;
         }
